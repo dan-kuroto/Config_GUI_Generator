@@ -1,2 +1,16 @@
-# Config_GUI_Generator
-GUI软件中配置窗口和配置类的模板代码生成器。A generator of template code for config window and config class in GUI softwares.
+# Config GUI Generator
+Languages: 简体中文 | [English](./README.en.md)
+
+## 介绍
+> 在编写GUI软件的时候，配置窗口类和配置数据类做起来真无聊，要是能自动生成代码就好了。
+
+👆 基于这样的想法，我开发了这个工具。
+
+**个人精力有限，目前仅支持基于 `Python3` + `PyQt5` 的GUI代码生成。**
+
+通过这个工具，你能以一种**类HTML**的格式声明软件中可配置的数据及其排版方式。工具将自动生成一份包含了配置窗口类和配置数据类的模板代码，程序员稍微改改就能用，极大降低工作量。
+
+- **Q** 为什么用 `class` 存储配置信息而不是字典类型？
+- **A** 使用 `class` 可以让编辑器帮忙检查拼写错误，避免低级错误。
+- **Q** 为什么用类HTML格式来声明，而不是json格式？
+- **A** 降低入门难度，并使程序员可以在一定程度上预览效果。
