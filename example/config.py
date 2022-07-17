@@ -9,6 +9,11 @@ from PyQt5.QtGui import *
 
 
 class ConfigData:
+    """
+    ATTENTION:
+    1. Don't use current `ConfigData` in your own code. It can only be used in `ConfigWindow`
+    2. Don't call `save` of any `ConfigData`. `ConfigWindow` will control it.
+    """
     def __init__(self):
         # set config path
         self.__config_path = os.path.abspath(r'res\config.json')
@@ -44,6 +49,10 @@ class ConfigData:
 
 
 class ConfigWindow(QWidget):
+    """
+    ATTENTION:
+    1. Get config data by getters in `ConfigWindow` instead of `__config_data.*`
+    """
     def __init__(self, config_changed: Callable[[], None]):
         """
         :param config_changed: function to call when config is changed
