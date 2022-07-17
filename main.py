@@ -9,6 +9,9 @@ from generator import BaseGenerator, PyQt5Generator
 support: Dict[str, Dict[str, Type[BaseGenerator]]] = { 'PYTHON3': { 'PYQT5': PyQt5Generator } }
 
 if __name__ == '__main__':
+    # avoid relative path errors due to starting programs from other paths
+    os.chdir(os.path.split(os.path.realpath(__file__))[0])
+
     # parse args
     parser = argparse.ArgumentParser('code generator for ConfigData and ConfigWindow in GUI softwares')
     parser.add_argument('-i', '--input', type=str, help='input file path (*.html)')
@@ -39,6 +42,8 @@ if __name__ == '__main__':
     args.output = os.path.abspath(args.output)
     args.language = args.language.upper()
     args.module = args.module.upper()
+    print('test', args.input)
+    print('test', args.output)
     if not os.path.exists(args.input):
         print(f'input file "{args.input}" not found')
         sys.exit(1)
