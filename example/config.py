@@ -116,6 +116,10 @@ class ConfigWindow(QWidget):
         :return: True if input is valid, False otherwise
         """
         raise NotImplementedError("You should implement this method by yourself!")
+
+        if len(self.__text_edit_user_name.text()) < 3:
+            QMessageBox.warning(self, '错误', '用户名长度不能小于3')
+            return False
         return True
 
     def on_button_cancel_clicked(self):
