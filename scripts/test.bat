@@ -1,1 +1,1 @@
-python main.py -i test/config.html -o test/config.py
+python main.py -i test/config.html -o test/config.py -f

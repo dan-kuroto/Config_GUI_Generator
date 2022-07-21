@@ -3,10 +3,15 @@ import os
 import sys
 from typing import Dict, Type
 
-from generator import BaseGenerator, PyQt5Generator
+from generator import BaseGenerator, PyQt5Generator, PySide2Generator
 
 
-support: Dict[str, Dict[str, Type[BaseGenerator]]] = { 'PYTHON3': { 'PYQT5': PyQt5Generator } }
+support: Dict[str, Dict[str, Type[BaseGenerator]]] = {
+    'PYTHON3': {
+        'PYQT5': PyQt5Generator,
+        'PYSIDE2': PySide2Generator,
+    },
+}
 
 if __name__ == '__main__':
     # avoid relative path errors due to starting programs from other paths
@@ -22,6 +27,7 @@ if __name__ == '__main__':
     parser.add_argument('-m', '--module', type=str, help='module name of GUI software', default='PyQt5')
     parser.add_argument('-v', '--version', action='version', version='ConfigGUIGenerator 0.1')
     parser.add_argument('-s', '--support', action='store_true', help='show support list')
+    parser.add_argument('-f', '--force', action='store_true', help='force to write output file, even if it already exists')
     args = parser.parse_args()
 
     # check args
@@ -42,15 +48,13 @@ if __name__ == '__main__':
     args.output = os.path.abspath(args.output)
     args.language = args.language.upper()
     args.module = args.module.upper()
-    print('test', args.input)
-    print('test', args.output)
     if not os.path.exists(args.input):
         print(f'input file "{args.input}" not found')
         sys.exit(1)
     if not os.path.exists(os.path.dirname(args.output)):
         print(f'output file directory "{os.path.dirname(args.output)}" not found')
         sys.exit(1)
-    if os.path.exists(args.output):
+    if os.path.exists(args.output) and not args.force:
         print(f'output file "{args.output}" already exists')
         sys.exit(1)
     if args.language not in support:
